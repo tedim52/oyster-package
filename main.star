@@ -11,13 +11,14 @@ def run(
     """
     Args:
         admin_email(string): email to use for admin user and initial member seeded to the db.
-        smtp_host(string): the server address you are using to send emails. Example: smtp.gmail.com
-        smtp_username(string): your email address that you'll be sending emails with. Example: you@gmail.com
-        smtp_password(string): he password to your email account. 
+        smtp_host(string): the server address you are using to send emails. Example: smtp.gmail.com. 
+            Follow guide at https://github.com/colorstackorg/oyster/blob/main/docs/how-to-enable-emails.md to setup your SMTP values.
+        smtp_username(string): your email address that you'll be sending emails with. Example: you@gmail.com. If left empty, no SMTP is setup.
+        smtp_password(string): the password to your email account. 
             Note that for your security, many services like Gmail won't let you authenticate with just your plain password, 
             and you have to generate a special password to use for authentication. 
             Example: your_password
-        
+            If left empty, no SMTP is setup.
     """
     # start redis instance
     cache = redis.run(plan)
