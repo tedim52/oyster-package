@@ -3,16 +3,16 @@ redis = import_module("github.com/kurtosis-tech/redis-package/main.star")
 
 def run(
     plan, 
-    admin_email="oyster@colorstack.org",
+    smtp_username,
+    smtp_password,
     smtp_host="smtp.gmail.com",
-    smtp_username="",
-    smtp_password="",
+    admin_email="oyster@colorstack.org",
 ):
     """ Runs Oytser app
 
     Args:
         admin_email (string): email to use for admin user and initial member seeded to the db.
-        smtp_host (string): the server address you are using to send emails. Example: smtp.gmail.com. If SMTP values left empty, no email setup.
+        smtp_host (string): the server address you are using to send emails. Example: smtp.gmail.com. 
         smtp_username (string): your email address that you'll be sending emails with. Example: you@gmail.com. 
         smtp_password (string): the password to your email account. 
     """
