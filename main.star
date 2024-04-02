@@ -59,7 +59,7 @@ def run(
         name="oyster",
         config=ServiceConfig(
             image="tedim52/oysterapp:latest",
-            cmd=["bash", "-c", "yarn db:migrate && yarn db:seed && yarn start"],
+            cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
             env_vars={
                 "DATABASE_URL": db.url,
                 "ADMIN_DASHBOARD_URL": "http://localhost:{0}".format(ADMIN_DASHBOARD_PORT),
