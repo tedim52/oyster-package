@@ -8,7 +8,7 @@ def run(
     smtp_host="smtp.gmail.com",
     admin_email="oyster@colorstack.org",
 ):
-    """ Runs Oytser app
+    """ Runs Oyster app
 
     Args:
         admin_email (string): email to use for admin user and initial member seeded to the db.
