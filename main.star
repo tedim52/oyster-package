@@ -20,7 +20,7 @@ def run(
     cache = redis.run(plan)
 
     # TODO: update redis package to just return this url like postgres package
-    redis_url = "redis://{0}:{0}".format(cache.hostname, cache.port_number)
+    redis_url = "redis://{0}:{1}".format(cache.hostname, cache.port_number)
 
     # start postgres database
     db = postgres.run(
