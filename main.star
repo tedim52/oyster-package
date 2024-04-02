@@ -63,11 +63,7 @@ def run(
         name="oyster",
         config=ServiceConfig(
             image="tedim52/oysterapp:latest",
-<<<<<<< Updated upstream
             cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
-=======
-            cmd=["bash", "-c", "& yarn db:migrate && yarn db:seed && yarn start"],
->>>>>>> Stashed changes
             env_vars={
                 "DATABASE_URL": colorstack_db_url,
                 "ADMIN_DASHBOARD_URL": "http://localhost:{0}".format(ADMIN_DASHBOARD_PORT),
