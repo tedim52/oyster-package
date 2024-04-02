@@ -3,7 +3,7 @@ redis = import_module("github.com/kurtosis-tech/redis-package/main.star")
 
 def run(
     plan, 
-    admin_email="oyster@colorstack.org"
+    admin_email="oyster@colorstack.org",
     smtp_host="smtp.gmail.com",
     smtp_username="",
     smtp_password="",
