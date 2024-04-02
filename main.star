@@ -46,7 +46,7 @@ def run(plan, args):
     plan.add_service(
         name="oyster",
         config=ServiceConfig(
-            image="tedim52/oyster:latest",
+            image="tedim52/oysterapp:latest",
             cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
             env_vars={
                 "DATABASE_URL": colorstack_db_url,
