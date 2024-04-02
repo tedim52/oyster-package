@@ -19,21 +19,21 @@ def run(
     # start redis instance
     cache = redis.run(plan)
 
-    # TODO: construct redis url from cache object
-    redis_url = "redis://redis:6379"
+    # TODO: update redis package to just return this url like postgres package
+    redis_url = "redis://redis:{0}".format(cache.ports["client"].number)
 
     # start postgres database
     db = postgres.run(
         plan,
         user="colorstack",
         password="colorstack",
+        database,
+        da
         launch_adminer=True)
+    plan.print(db.url)
 
-    #TODO: construct url from db object
-    colorstack_db_url = "postgresql://colorstack:colorstack@postgres:5432/colorstack"
-
-    # Technically this can be done via running the oyster application but wanted to show you can setup db without running application
-    # seed database
+    # This can be done via the oyster application but wanted to show you can setup db without running application
+    # setup db
     db_setup_sql_script = plan.render_templates(
         name="db-setup-script",
         config={
@@ -62,7 +62,7 @@ def run(
             image="tedim52/oysterapp:latest",
             cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
             env_vars={
-                "DATABASE_URL": colorstack_db_url,
+                "DATABASE_URL": db.url,
                 "ADMIN_DASHBOARD_URL": "http://localhost:{0}".format(ADMIN_DASHBOARD_PORT),
                 "API_URL": "http://localhost:{0}".format(API_PORT),
                 "ENVIRONMENT": "development",
@@ -81,7 +81,7 @@ def run(
                     application_protocol="http"
                 ),
                 "student_profile_frontend": PortSpec(
-                    number=4000, # remix set to servce frontend on 4000
+                    number=4000, # remix set to serve frontend on 4000
                     transport_protocol="TCP",
                     application_protocol="http"
                 ),
