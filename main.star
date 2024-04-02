@@ -31,7 +31,7 @@ def run(
         launch_adminer=True)
     plan.print(db.url)
 
-    # This can be done via the oyster application but wanted to show you can setup db without running application
+    # This can be done via the oyster application but wanted to show a way to setup db without running app
     # setup db
     db_setup_sql_script = plan.render_templates(
         name="db-setup-script",
@@ -59,7 +59,7 @@ def run(
         name="oyster",
         config=ServiceConfig(
             image="tedim52/oysterapp:latest",
-            cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
+            cmd=["bash", "-c", "yarn db:migrate && yarn db:seed && yarn start"],
             env_vars={
                 "DATABASE_URL": db.url,
                 "ADMIN_DASHBOARD_URL": "http://localhost:{0}".format(ADMIN_DASHBOARD_PORT),
