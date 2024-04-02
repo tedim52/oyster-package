@@ -27,8 +27,7 @@ def run(
         plan,
         user="colorstack",
         password="colorstack",
-        database,
-        da
+        database="colorstack",
         launch_adminer=True)
     plan.print(db.url)
 
