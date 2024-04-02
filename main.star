@@ -1,7 +1,24 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 redis = import_module("github.com/kurtosis-tech/redis-package/main.star")
 
-def run(plan, args):
+def run(
+    plan, 
+    admin_email="oyster@colorstack.org"
+    smtp_host="smtp.gmail.com",
+    smtp_username="",
+    smtp_password="",
+):
+    """
+    Args:
+        admin_email(string): email to use for admin user and initial member seeded to the db.
+        smtp_host(string): the server address you are using to send emails. Example: smtp.gmail.com
+        smtp_username(string): your email address that you'll be sending emails with. Example: you@gmail.com
+        smtp_password(string): he password to your email account. 
+            Note that for your security, many services like Gmail won't let you authenticate with just your plain password, 
+            and you have to generate a special password to use for authentication. 
+            Example: your_password
+        
+    """
     # start redis instance
     cache = redis.run(plan)
 
@@ -17,7 +34,6 @@ def run(plan, args):
 
     #TODO: construct url from db object
     colorstack_db_url = "postgresql://colorstack:colorstack@postgres:5432/colorstack"
-
 
     # Technically this can be done via running the oyster application but wanted to show you can setup db without running application
     # seed database
@@ -47,7 +63,11 @@ def run(plan, args):
         name="oyster",
         config=ServiceConfig(
             image="tedim52/oysterapp:latest",
+<<<<<<< Updated upstream
             cmd=["bash", "-c", "yarn && yarn db:migrate && yarn db:seed && yarn start"],
+=======
+            cmd=["bash", "-c", "& yarn db:migrate && yarn db:seed && yarn start"],
+>>>>>>> Stashed changes
             env_vars={
                 "DATABASE_URL": colorstack_db_url,
                 "ADMIN_DASHBOARD_URL": "http://localhost:{0}".format(ADMIN_DASHBOARD_PORT),
@@ -56,7 +76,10 @@ def run(plan, args):
                 "JWT_SECRET": "_",
                 "SESSION_SECRET": "_",
                 "REDIS_URL": redis_url,
-                "STUDENT_PROFILE_URL": "http://localhost:{0}".format(STUDENT_PROFILE_PORT)
+                "STUDENT_PROFILE_URL": "http://localhost:{0}".format(STUDENT_PROFILE_PORT),
+                "SMTP_HOST": smtp_host,
+                "SMTP_USERNAME": smtp_username,
+                "SMTP_PASSWORD": smtp_password,
             },
             ports= {
                 "admin_dashboard_frontend": PortSpec(
